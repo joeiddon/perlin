@@ -9,13 +9,13 @@ function dotGridGradient(vertX, vertY, x, y){
 	return dVect.x * gVect.x + dVect.y * gVect.y
 }
 
+var gradient
 var dotProduct = (vect1, vect2) => vect1.x * vect2.x + vect1.y + vect2.y
-
 var linTerp = (a, b, w) => (1 - w)*a + w*b
 
 var perlin = {
 	seed: function(){
-		var gradient = []
+		gradient = []
 		for (var y = 0; y < gridSize; y++){
 			var row = []
 			for (var x = 0; x < gridSize; x++){
