@@ -23,7 +23,7 @@ var perlin = {
 			}
 			gradient.push(row)
 		}
-	}
+	},
 
 	get: function(x, y) {
 		var cell = {x0: Math.floor(x), x1: Math.floor(x) + 1, y0: Math.floor(y), y1: Math.floor(y) + 1}
