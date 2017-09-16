@@ -10,13 +10,24 @@ var perlin = {
 		return dVect.x * gVect.x + dVect.y * gVect.y
 	},
 	
+	smootherstep: function(x){
+		return 6 * Math.pow(x, 5) - 15 * Math.pow(x, 4) + 10 * Math.pow(x, 3)
+	},
+	
+	smoothTerp: function(a, b, w){
+		return a + this.smootherstep(w) * (b - a)
+	},
+	
 	linTerp: function(a, b, w){
 		return (1 - w) * a + w * b
 	},
 	
+	
+	
 	gradients: new Array,
 	
 	seed: function(){
+		this.gradients = []
 		for (var y = 0; y < 256; y++){
 			var row = []
 			for (var x = 0; x < 256; x++){
@@ -40,11 +51,11 @@ var perlin = {
 		
 		tl = this.dotGridGradient(x0, y0, x, y)
 		tr = this.dotGridGradient(x1, y0, x, y)
-		xTop = this.linTerp(tl, tr, xWeight)
+		xTop = this.smoothTerp(tl, tr, xWeight)
 		bl = this.dotGridGradient(x0, y1, x, y)
 		br = this.dotGridGradient(x1, y1, x, y)
-		xBottom = this.linTerp(bl, br, xWeight)
-		return (this.linTerp(xTop, xBottom, yWeight) + 1) / 2
+		xBottom = this.smoothTerp(bl, br, xWeight)
+		return (this.smoothTerp(xTop, xBottom, yWeight) + 1) / 2
 	}
 }
 
