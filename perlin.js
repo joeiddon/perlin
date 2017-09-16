@@ -16,9 +16,9 @@ var linTerp = (a, b, w) => (1 - w)*a + w*b
 var perlin = {
 	seed: function(){
 		gradient = []
-		for (var y = 0; y < gridSize; y++){
+		for (var y = 0; y < 256; y++){
 			var row = []
-			for (var x = 0; x < gridSize; x++){
+			for (var x = 0; x < 256; x++){
 				row.push(rand2dVect())
 			}
 			gradient.push(row)
@@ -44,5 +44,4 @@ var perlin = {
 	}
 }
 
-var gridSize = 256
 perlin.seed()
