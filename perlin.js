@@ -55,7 +55,7 @@ var perlin = {
 		bl = this.dotGridGradient(x0, y1, x, y)
 		br = this.dotGridGradient(x1, y1, x, y)
 		xBottom = this.smoothTerp(bl, br, xWeight)
-		return (this.smoothTerp(xTop, xBottom, yWeight) + 1) / 2
+		return this.smoothTerp(xTop, xBottom, yWeight)
 	}
 }
 
