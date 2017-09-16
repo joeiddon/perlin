@@ -4,11 +4,12 @@
 
 
 </head>
-<body>
-<canvas id="cnvs" width="720" height="720"></canvas>
+<body style="margin: 0;">
+<canvas id="cnvs"></canvas>
 
 <script>
 var cnvs = document.getElementById("cnvs")
+cnvs.width = cnvs.height = Math.max(innerWidth, innerHeight)
 var ctx = cnvs.getContext("2d")
 
 var gridSize = 8
@@ -17,16 +18,16 @@ var pixSize = cnvs.width / resolution
 var random = true
 
 function update(){
-perlin.seed()
-for (var y = 0; y < gridSize; y += gridSize / resolution){
-	for (var x = 0; x < gridSize; x += gridSize / resolution){
-		if (random) var v = parseInt(Math.random() * 255)
-		else var v = parseInt(perlin.get(x, y) * 255)
-		ctx.fillStyle = 'rgb(' + v + ',' + v + ',' + v + ')'
-		ctx.fillRect(x * (cnvs.width / gridSize), y * (cnvs.width / gridSize), pixSize, pixSize)
+	perlin.seed()
+	for (var y = 0; y < gridSize; y += gridSize / resolution){
+		for (var x = 0; x < gridSize; x += gridSize / resolution){
+			if (random) var v = parseInt(Math.random() * 255)
+			else var v = parseInt(perlin.get(x, y) * 255)
+			ctx.fillStyle = 'rgb(' + v + ',' + v + ',' + v + ')'
+			ctx.fillRect(x * (cnvs.width / gridSize), y * (cnvs.width / gridSize), pixSize, pixSize)
+		}
 	}
-}
-random = !random
+	random = !random
 }
 
 update()
