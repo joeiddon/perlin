@@ -17,10 +17,11 @@ var pixSize = cnvs.width / resolution
 var random = true
 
 function update(){
+perlin.seed()
 for (var y = 0; y < gridSize; y += gridSize / resolution){
 	for (var x = 0; x < gridSize; x += gridSize / resolution){
 		if (random) var v = parseInt(Math.random() * 255)
-		else var v = parseInt(perlin(x, y) * 255)
+		else var v = parseInt(perlin.get(x, y) * 255)
 		ctx.fillStyle = 'rgb(' + v + ',' + v + ',' + v + ')'
 		ctx.fillRect(x * (cnvs.width / gridSize), y * (cnvs.width / gridSize), pixSize, pixSize)
 	}
