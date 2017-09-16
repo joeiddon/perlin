@@ -9,11 +9,11 @@
 
 <script>
 var cnvs = document.getElementById("cnvs")
-cnvs.width = cnvs.height = Math.max(innerWidth, innerHeight)
+cnvs.width = cnvs.height = Math.min(innerWidth, innerHeight)
 var ctx = cnvs.getContext("2d")
 
 var gridSize = 8
-var resolution = 127
+var resolution = 128
 var pixSize = cnvs.width / resolution
 var random = true
 
