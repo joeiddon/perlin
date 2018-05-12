@@ -1,39 +1,33 @@
 <html>
 <head>
-<script src="perlin.js"></script>
-
-
+<script src='perlin.js'></script>
 </head>
-<body style="margin: 0;">
-<canvas id="cnvs"></canvas>
-
+<body style='margin:0'>
+<canvas id='cnvs'></canvas>
 <script>
-var cnvs = document.getElementById("cnvs")
-cnvs.width = cnvs.height = Math.min(innerWidth, innerHeight)
-var ctx = cnvs.getContext("2d")
+let cnvs = document.getElementById('cnvs');
+cnvs.width = cnvs.height = Math.min(innerWidth, innerHeight);
+let ctx = cnvs.getContext('2d');
 
-var gridSize = 8
-var resolution = 128
-var pixSize = cnvs.width / resolution
-var random = true
+let grid_size = 4;
+let pixels = 128;
+let pix_size = cnvs.width / pixels;
 
 function update(){
-	perlin.seed()
-	for (var y = 0; y < gridSize; y += gridSize / resolution){
-		for (var x = 0; x < gridSize; x += gridSize / resolution){
-			if (random) var v = parseInt(Math.random() * 255)
-			else var v = parseInt(perlin.get(x, y) * 360)
-			ctx.fillStyle = 'hsl(' + v + ', 50%, 50%)'
-			ctx.fillRect(x * (cnvs.width / gridSize), y * (cnvs.width / gridSize), pixSize, pixSize)
-		}
-	}
-	random = !random
+    perlin.seed();
+    for (let y = 0; y < grid_size; y += grid_size / pixels){
+        for (let x = 0; x < grid_size; x += grid_size / pixels){
+            let v = parseInt(perlin.get(x, y) * 360);
+            ctx.fillStyle = 'hsl('+v+',50%,50%)';
+            ctx.fillRect(x * (cnvs.width / grid_size),
+                         y * (cnvs.width / grid_size),
+                         pix_size, pix_size);
+        }
+    }
 }
 
-update()
-setInterval(update, 2000)
-
+update();
+setInterval(update, 2000);
 </script>
-
 </body>
 </html>

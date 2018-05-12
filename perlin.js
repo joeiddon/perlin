@@ -1,62 +1,40 @@
-var perlin = {
-	rand2dVect: function(){
-		var theta = Math.random() * 2 * Math.PI
-		return {x: Math.cos(theta), y: Math.sin(theta)}	
-	},
-	
-	dotGridGradient: function(vertX, vertY, x, y){
-		var gVect = this.gradients[vertY][vertX]
-		var dVect = {x: x - vertX, y: y - vertY}
-		return dVect.x * gVect.x + dVect.y * gVect.y
-	},
-	
-	smootherstep: function(x){
-		return 6 * Math.pow(x, 5) - 15 * Math.pow(x, 4) + 10 * Math.pow(x, 3)
-	},
-	
-	smoothTerp: function(a, b, w){
-		return a + this.smootherstep(w) * (b - a)
-	},
-	
-	linTerp: function(a, b, w){
-		return (1 - w) * a + w * b
-	},
-	
-	
-	
-	gradients: new Array,
-	
-	seed: function(){
-		this.gradients = []
-		for (var y = 0; y < 256; y++){
-			var row = []
-			for (var x = 0; x < 256; x++){
-				row.push(this.rand2dVect())
-			}
-			this.gradients.push(row)
-		}
-	},
-
-	get: function(x, y) {
-		var x0 = Math.floor(x)
-		var x1 = x0 + 1
-		var y0 = Math.floor(y)
-		var y1 = y0 + 1
-		
-		var xWeight = x - x0
-		var yWeight = y - y0
-		
-		//interpolate
-		var tl, tr, bl, br, xTop, xBottom
-		
-		tl = this.dotGridGradient(x0, y0, x, y)
-		tr = this.dotGridGradient(x1, y0, x, y)
-		xTop = this.smoothTerp(tl, tr, xWeight)
-		bl = this.dotGridGradient(x0, y1, x, y)
-		br = this.dotGridGradient(x1, y1, x, y)
-		xBottom = this.smoothTerp(bl, br, xWeight)
-		return this.smoothTerp(xTop, xBottom, yWeight)
-	}
+'use strict';
+let perlin = {
+    rand_2d_vect: function(){
+        let theta = Math.random() * 2 * Math.PI;
+        return {x: Math.cos(theta), y: Math.sin(theta)};
+    },
+    dot_prod_grid: function(x, y, vx, vy){
+        let g_vect;
+        let d_vect = {x: x - vx, y: y - vy};
+        if (this.gradients[[vx,vy]]){
+            g_vect = this.gradients[[vx,vy]];
+        } else {
+            g_vect = this.rand_2d_vect();
+            this.gradients[[vx, vy]] = g_vect;
+        }
+        return d_vect.x * g_vect.x + d_vect.y * g_vect.y;
+    },
+    smootherstep: function(x){
+        return 6*x**5 - 15*x**4 + 10*x**3;
+    },
+    interp: function(x, a, b){
+        return a + this.smootherstep(x) * (b-a);
+    },
+    seed: function(){
+        this.gradients = {};
+    },
+    get: function(x, y) {
+        let xf = Math.floor(x);
+        let yf = Math.floor(y);
+        //interpolate
+        let tl = this.dot_prod_grid(x, y, xf,   yf);
+        let tr = this.dot_prod_grid(x, y, xf+1, yf);
+        let bl = this.dot_prod_grid(x, y, xf,   yf+1);
+        let br = this.dot_prod_grid(x, y, xf+1, yf+1);
+        let xt = this.interp(x-xf, tl, tr);
+        let xb = this.interp(x-xf, bl, br);
+        return this.interp(y-yf, xt, xb);
+    }
 }
-
-perlin.seed()
+perlin.seed();
