@@ -15,6 +15,12 @@ Simply include the source in your application's HTML, no downloading required:
 <script src='http://joeiddon.me/perlin/perlin.js'></script>
 ```
 
+or you can use the, slightly shorter, `git.io` redirect:
+
+```html
+<script src='http://git.io/perlin.js'></script>
+```
+
 ---
 
 ### Usage
