@@ -1,6 +1,6 @@
 'use strict';
 let perlin = {
-    rand_2d_vect: function(){
+    rand_vect: function(){
         let theta = Math.random() * 2 * Math.PI;
         return {x: Math.cos(theta), y: Math.sin(theta)};
     },
@@ -10,7 +10,7 @@ let perlin = {
         if (this.gradients[[vx,vy]]){
             g_vect = this.gradients[[vx,vy]];
         } else {
-            g_vect = this.rand_2d_vect();
+            g_vect = this.rand_vect();
             this.gradients[[vx, vy]] = g_vect;
         }
         return d_vect.x * g_vect.x + d_vect.y * g_vect.y;
