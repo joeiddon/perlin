@@ -12,7 +12,7 @@ This short js library allows you to easily incorporate <a href='https://en.wikip
 Simply include the source in your application's HTML, no downloading required:
 
 ```html
-<script src='http://joeiddon.me/perlin/perlin.js></script>
+<script src='http://joeiddon.me/perlin/perlin.js'></script>
 ```
 
 ---
@@ -32,8 +32,10 @@ The function will return a float in the range `0 - 1` representing the 'noise-in
 
 All that `perlin.seed()` does (to be called with no arguments), is reset the stored noise so that you can generate fresh noise. On each reload of the library, this will be reset anyway, and if you were to just offset all your `perlin.get` calls away from your previous calls, you would achieve the same effect of generating new noise. However, by doing this, you are of course sacrificing some memory as the previous noise remains saved (this is negligible, but is something to bare in mind).
 
+---
+
 ### Examples
 
 I created a basic example of the noise being generated which you can see its source in this GitHub repository. The demo creates the most basic display of noise, but I added a heatmap-style effect to it (using the hsl() colour format) which makes the result clearer. You can view it in action <a href='http://joeiddon.me/perlin/demo'>here</a>.
 
-Obviously that is the most basic use of the library. Feel free to browse <a href='http://joeiddon.me'>my website</a> to see some other uses.
+Obviously that demo is the most basic use of the library. Feel free to browse <a href='http://joeiddon.me'>my website</a> to see some other uses.
