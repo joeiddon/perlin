@@ -7,6 +7,12 @@ This short js library allows you to easily incorporate <a href='https://en.wikip
 
 ---
 
+### Python
+
+Note that I have also translated the js code into Python, but I have not written any documentation as this library will mainly be used in js.
+
+---
+
 ### Installation
 
 Simply include the source in your application's HTML, no downloading required:
