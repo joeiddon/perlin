@@ -18,7 +18,7 @@ Note that I have also translated the js code into Python, but I have not written
 Simply include the source in your application's HTML, no downloading required:
 
 ```html
-<script src='http://joeiddon.me/perlin/perlin.js'></script>
+<script src='http://joeiddon.github.io/perlin/perlin.js'></script>
 ```
 
 or you can use the, slightly shorter, `git.io` redirect:
@@ -48,6 +48,6 @@ All that `perlin.seed()` does (to be called with no arguments), is reset the sto
 
 ### Examples
 
-I created a basic example of the noise being generated which you can see its source in this GitHub repository. The demo creates the most basic display of noise, but I added a heatmap-style effect to it (using the hsl() colour format) which makes the result clearer. You can view it in action <a href='http://joeiddon.me/perlin/demo'>here</a>.
+I created a basic example of the noise being generated which you can see its source in this GitHub repository. The demo creates the most basic display of noise, but I added a heatmap-style effect to it (using the hsl() colour format) which makes the result clearer. You can view it in action <a href='http://joeiddon.github.io/perlin/demo'>here</a>.
 
-Obviously that demo is the most basic use of the library. Feel free to browse <a href='http://joeiddon.me'>my website</a> to see some other uses.
+Obviously that demo is the most basic use of the library. Feel free to browse <a href='http://joeiddon.github.io'>my website</a> to see some other uses.
