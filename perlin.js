@@ -23,8 +23,8 @@ let perlin = {
     },
     seed: function(){
         this.gradients = {};
+        this.memory = {};
     },
-    memory: {},
     get: function(x, y) {
         if (this.memory.hasOwnProperty([x,y]))
             return this.memory[[x,y]];
