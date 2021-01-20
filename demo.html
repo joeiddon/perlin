@@ -2,32 +2,33 @@
 <head>
 <script src='perlin.js'></script>
 </head>
-<body style='margin:0'>
+<body>
 <canvas id='cnvs'></canvas>
 <script>
+'use strict';
 let cnvs = document.getElementById('cnvs');
-cnvs.width = cnvs.height = Math.min(innerWidth, innerHeight);
+cnvs.width = cnvs.height = 512;
 let ctx = cnvs.getContext('2d');
 
-let grid_size = 4;
-let pixels = 128;
-let pix_size = cnvs.width / pixels;
+const GRID_SIZE = 4;
+const RESOLUTION = 128;
+const COLOR_SCALE = 250;
 
-function update(){
-    perlin.seed();
-    for (let y = 0; y < grid_size; y += grid_size / pixels){
-        for (let x = 0; x < grid_size; x += grid_size / pixels){
-            let v = parseInt(perlin.get(x, y) * 360);
-            ctx.fillStyle = 'hsl('+v+',50%,50%)';
-            ctx.fillRect(x * (cnvs.width / grid_size),
-                         y * (cnvs.width / grid_size),
-                         pix_size, pix_size);
-        }
+let pixel_size = cnvs.width / RESOLUTION;
+let num_pixels = GRID_SIZE / RESOLUTION;
+
+for (let y = 0; y < GRID_SIZE; y += num_pixels / GRID_SIZE){
+    for (let x = 0; x < GRID_SIZE; x += num_pixels / GRID_SIZE){
+        let v = parseInt(perlin.get(x, y) * COLOR_SCALE);
+        ctx.fillStyle = 'hsl('+v+',50%,50%)';
+        ctx.fillRect(
+            x / GRID_SIZE * cnvs.width,
+            y / GRID_SIZE * cnvs.width,
+            pixel_size,
+            pixel_size
+        );
     }
 }
-
-update();
-setInterval(update, 2000);
 </script>
 </body>
 </html>
